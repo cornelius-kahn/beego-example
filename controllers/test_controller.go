@@ -8,23 +8,20 @@ type TestController struct {
 	beego.Controller
 }
 
-type LIKE struct {
+type TestMap struct {
 	Food   string
 	Watch  string
 	Listen string
 }
 
 type JSONS struct {
-	//必须的大写开头
-	Code string
-	Msg  string
-	User []string `json:"user_info"` //key重命名,最外面是反引号
-	Like LIKE
+	Ret  string  `json:"ret"`
+	Msg  string  `json:"msg"`
+	Data TestMap `json:"data"`
 }
 
 func (c *TestController) Get() {
-	data := &JSONS{"100", "获取成功",
-		[]string{"maple", "18"}, LIKE{"蛋糕", "电影", "音乐"}}
+	data := &JSONS{"0", "ok", TestMap{"蛋糕", "电影", "音乐"}}
 	c.Data["json"] = data
 	c.ServeJSON()
 }
