@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"beego-example/commons/responses"
+
 	"github.com/astaxie/beego"
 )
 
@@ -8,20 +10,15 @@ type TestController struct {
 	beego.Controller
 }
 
-type TestMap struct {
+type DataMap struct {
 	Food   string
 	Watch  string
 	Listen string
 }
 
-type JSONS struct {
-	Ret  string  `json:"ret"`
-	Msg  string  `json:"msg"`
-	Data TestMap `json:"data"`
-}
-
 func (c *TestController) Get() {
-	data := &JSONS{"0", "ok", TestMap{"蛋糕", "电影", "音乐"}}
+	result := DataMap{"蛋糕", "电影", "音乐"}
+	data := responses.SuccessDataPageReturn(1, result)
 	c.Data["json"] = data
 	c.ServeJSON()
 }
