@@ -29,5 +29,6 @@ func main() {
 	orm.RegisterDriver(beego.AppConfig.String("db_adapter"), orm.DRMySQL)
 	orm.RegisterDataBase(beego.AppConfig.String("db_conn_name"), beego.AppConfig.String("db_adapter"), beego.AppConfig.String("db_user")+":"+beego.AppConfig.String("db_password")+"@tcp("+beego.AppConfig.String("db_host")+":"+beego.AppConfig.String("db_port")+")/"+beego.AppConfig.String("db_database")+"?charset="+beego.AppConfig.String("db_charset"), beego.AppConfig.DefaultInt("db_max_idle", 10), beego.AppConfig.DefaultInt("db_max_conn", 50))
 
+	// start server
 	beego.Run()
 }

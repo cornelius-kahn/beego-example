@@ -3,7 +3,7 @@ package responses
 type ReturnStruct struct {
 	Ret   int         `json:"ret"`
 	Msg   string      `json:"msg"`
-	Count int         `json:"count,omitempty"`
+	Count int64       `json:"count,omitempty"`
 	Data  interface{} `json:"data,omitempty"`
 }
 
@@ -22,7 +22,7 @@ func SuccessDataReturn(data interface{}) *ReturnStruct {
 	return result
 }
 
-func SuccessDataPageReturn(count int, data interface{}) *ReturnStruct {
+func SuccessDataPageReturn(count int64, data interface{}) *ReturnStruct {
 	result := new(ReturnStruct)
 	result.Ret = 0
 	result.Msg = "ok"

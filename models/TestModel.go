@@ -1,6 +1,8 @@
 package models
 
 import (
+	"fmt"
+
 	"github.com/astaxie/beego/orm"
 )
 
@@ -22,8 +24,13 @@ func (t *TestModel) TableName() string {
 	return "info"
 }
 
-func (t *TestModel) GetList() (list []*TestModel) {
+func (t *TestModel) GetList(page int, size int) (count int64, list []*TestModel) {
 	o := orm.NewOrm()
-	o.QueryTable(t.TableName()).All(&list)
+	o.QueryTable(t.TableName()).Limit(size, (page-1)*size).All(&list)
+	count, err := o.QueryTable(t.TableName()).Count()
+	if err != nil {
+		fmt.Println(err)
+	}
 	return
+
 }
